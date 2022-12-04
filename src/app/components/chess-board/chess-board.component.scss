@@ -1,0 +1,184 @@
+$primary-color: #00005c; // Change color here. C'mon, try it! 
+$text-color: mix(#000, $primary-color, 64%);
+.parent {
+    margin : 1rem;
+    .chessboard {
+        width: 640px;
+        height: 640px;
+        // margin: auto;
+        float: left;
+        display: table-cell;
+
+        border: 25px solid #333;
+        .black {
+            float: left;
+            width: 80px;
+            height: 80px;
+            background-color: #999;
+            font-size:50px;
+            text-align:center;
+            display: table-cell;
+            vertical-align:middle;
+        }
+        .white {
+            float: left;
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            font-size:50px;
+            text-align:center;
+            display: table-cell;
+            vertical-align:middle;
+        }
+    }
+    .controls {
+        margin-left: 2rem;
+        float: left;
+        display: table-cell;
+        .controls-positions {
+            margin-top: 1rem;
+        }
+    }
+}
+.btn-place {
+    background-color: #111827;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: .75rem 1.2rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+  }
+  
+  .btn-place:hover {
+    background-color: #374151;
+  }
+  
+  .btn-place:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  
+form {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+label {
+	display: flex;
+	cursor: pointer;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.375em;
+	/* Accessible outline */
+	/* Remove comment to use */ 
+	/*
+		&:focus-within {
+				outline: .125em solid $primary-color;
+		}
+	*/
+	input {
+		position: absolute;
+		left: -9999px;
+		&:checked + span {
+			background-color: mix(#fff, $primary-color, 84%);
+			&:before {
+				box-shadow: inset 0 0 0 0.4375em $primary-color;
+			}
+		}
+	}
+	span {
+		display: flex;
+		align-items: center;
+		padding: 0.375em 0.75em 0.375em 0.375em;
+		border-radius: 99em; // or something higher...
+		transition: 0.25s ease;
+		&:hover {
+			background-color: mix(#fff, $primary-color, 84%);
+		}
+		&:before {
+			display: flex;
+			flex-shrink: 0;
+			content: "";
+			background-color: #fff;
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 50%;
+			margin-right: 0.375em;
+			transition: 0.25s ease;
+			box-shadow: inset 0 0 0 0.125em $primary-color;
+		}
+	}
+}
+
+// Codepen spesific styling - only to center the elements in the pen preview and viewport
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+.button {
+    float: left;
+    margin: 0 20px 0 0;
+    width: 3rem;
+    height: 7rem;
+    position: relative;
+  }
+  
+  .button label,
+  .button input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+  
+  
+  .button input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+  }
+  
+  .button input[type="radio"]:checked + label {
+    background: #d6d6e5;
+    border-radius: 4px;
+  }
+  
+  .button label {
+    cursor: pointer;
+    z-index: 90;
+    line-height: 1.8em;
+  }
+  
+  .btn-default {
+    font-size: 3rem;
+  }

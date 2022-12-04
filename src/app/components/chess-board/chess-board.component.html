@@ -1,0 +1,195 @@
+<div class="parent">
+  <div class="chessboard">
+   
+    <ng-container *ngFor="let box of boxes; index as i">
+      <ng-container *ngFor="let item of box; index as j">
+        <div
+          [ngClass]="
+            i % 2 === 0
+              ? item % 2 == 0
+                ? 'white x_' + (box.length - i - 1) + ' y_' + j
+                : 'black x_' + (box.length - i - 1) + ' y_' + j
+              : item % 2 == 0
+              ? 'black x_' + (box.length - i - 1) + ' y_' + j
+              : 'white x_' + (box.length - i - 1) + ' y_' + j
+          "
+        >
+
+          <ng-container *ngIf="place && j===xPosition && (box.length - i - 1)=== yPosition">
+            <span *ngIf="pawnColor === 'black'">&#9823;</span>
+            <span *ngIf="pawnColor === 'white'">&#9817;</span>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="controls" *ngIf="!place; else nextStep">
+    <!-- HTML !-->
+    <div class="controls-positions">
+      <div>Position X :</div>
+      <input
+        type="number"
+        [(ngModel)]="xPosition"
+        type="number"
+        min="0"
+        max="7"
+        name="position_x"
+        id="position_x"
+      />
+    </div>
+    <div class="controls-positions">
+      <div>Position Y :</div>
+      <input
+        type="number"
+        [(ngModel)]="yPosition"
+        type="number"
+        min="0"
+        max="7"
+        name="position_y"
+        id="position_y"
+      />
+    </div>
+    <div class="controls-positions">
+      <div>Pawn Facing :</div>
+      <form>
+        <label>
+          <input
+            type="radio"
+            name="radio"
+            value="North"
+            [(ngModel)]="direction"
+          />
+          <span>North</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="radio"
+            value="East"
+            [(ngModel)]="direction"
+          />
+          <span>East</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="radio"
+            value="West"
+            [(ngModel)]="direction"
+          />
+          <span>West</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="radio"
+            value="South"
+            [(ngModel)]="direction"
+          />
+          <span>South</span>
+        </label>
+      </form>
+    </div>
+
+    <div>Color :</div>
+    <div class="button">
+      <input
+        type="radio"
+        id="black"
+        name="check-color"
+        value="black"
+        [(ngModel)]="pawnColor"
+        title="Black"
+      />
+      <label class="btn btn-default" for="black">&#9823;</label>
+    </div>
+    <div class="button">
+      <input
+        type="radio"
+        id="white"
+        name="check-color"
+        value="white"
+        [(ngModel)]="pawnColor"
+        title="White"
+      />
+      <label class="btn btn-default" for="white">&#9817;</label>
+    </div>
+
+    <div>
+      <button class="btn-place" role="button" (click)="startPlaying()">PLACE</button>
+    </div>
+  </div>
+  <ng-template #nextStep>
+    <div class="controls" >
+        <!-- <button class="btn-place" role="button" (click)="startPlaying()">PLACE</button> -->
+        <div>Move :</div>
+        
+        <div class="button">
+            <input
+              type="radio"
+              id="1"
+              name="check-moves"
+              value="1"
+              [(ngModel)]="pawnMoves"
+              title="1"
+            />
+            <label class="btn btn-default" for="1">1</label>
+          </div>
+        <div class="button" [ngStyle]="{'visibility': originalPositions.xPosition === xPosition && originalPositions.yPosition === yPosition ? '' : 'hidden' }">
+          <input
+            type="radio"
+            id="2"
+            name="check-moves"
+            value="2"
+            [(ngModel)]="pawnMoves"
+            title="2"
+          />
+          <label class="btn btn-default" for="2">2</label>
+        </div>
+        <div>Face Towards :</div>
+        
+        <div class="button">
+            <input
+              type="radio"
+              id="left"
+              name="check-face"
+              value="left"
+              [(ngModel)]="pawnTurn"
+              title="left"
+            />
+            <label class="btn btn-default" for="left">&#8592;</label>
+          </div>
+        <div class="button">
+            <input
+              type="radio"
+              id="right"
+              name="check-face"
+              value="right"
+              [(ngModel)]="pawnTurn"
+              title="right"
+            />
+            <label class="btn btn-default" for="right">&#8594;</label>
+          </div>
+          <div>
+            <button class="btn-place" role="button" (click) = "clean()">Clear Selection</button>
+        </div>
+          <div>
+            <button class="btn-place" role="button" (click) = "play()">Play</button>
+            
+        </div>
+        <div>
+            <button class="btn-place" role="button" (click) = "report()">Report</button>
+        </div>
+        <div>
+            <button class="btn-place" role="button" (click) = "restartGame()">Restart</button>
+
+        </div>
+          
+    </div>
+    <div *ngIf="reportMove.length > 0">
+        <span><b>POSITION : </b> {{reportMove}}</span>
+      </div>
+  </ng-template>
+
+</div>
+
